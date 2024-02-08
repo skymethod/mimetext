@@ -188,7 +188,7 @@ export class MimeMessage {
             'Content-Disposition': `${disposition}; filename="${opts.filename}"`
         })
 
-        return this._addMessage({ data: opts.data, headers: opts.headers });
+        return this.#_addMessage({ data: opts.data, headers: opts.headers });
     }
 
     addMessage(opts: ContentOptions): MimeMessageContent {
@@ -211,10 +211,10 @@ export class MimeMessage {
             'Content-Transfer-Encoding': encoding
         });
 
-        return this._addMessage({ data: opts.data, headers: opts.headers });
+        return this.#_addMessage({ data: opts.data, headers: opts.headers });
     }
 
-    private _addMessage(opts: { data: string, headers: ContentHeaders }): MimeMessageContent {
+    #_addMessage(opts: { data: string, headers: ContentHeaders }): MimeMessageContent {
         const msg = new MimeMessageContent(this.envctx, opts.data, opts.headers);
 
         this.messages.push(msg);
